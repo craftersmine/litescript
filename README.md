@@ -1,1 +1,3 @@
 # litescript
+
+lightweight scripts!
