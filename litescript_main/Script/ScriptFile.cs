@@ -14,13 +14,25 @@ namespace craftersmine.LiteScript.Script
         {
             Filename = file;
 
+            List<string> _fcontents = new List<string>();
+
             if (!File.Exists(file))        // Проверяем на существование file
             {
                 File.WriteAllText(file, "~lscript\r\n\r\n~end");  // Генерируем если не существует
-                FileContents = File.ReadAllLines(file);
+                foreach (var line in File.ReadAllLines(file))
+                {
+                    if (!line.StartsWith("#"))
+                        _fcontents.Add(line);
+                }
+                FileContents = _fcontents.ToArray();
             }
             else
-                FileContents = File.ReadAllLines(file);  // Иначе читаем в FileContents
+                foreach (var line in File.ReadAllLines(file))
+                {
+                    if (!line.StartsWith("#"))
+                        _fcontents.Add(line);
+                }
+            FileContents = _fcontents.ToArray();  // Иначе читаем в FileContents
         }
 
         public string[] ReRead()
