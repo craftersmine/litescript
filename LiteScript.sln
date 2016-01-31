@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "litescript_main", "litescri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lscript_console", "lscript_console\lscript_console.csproj", "{40380CD4-711A-45F0-8661-47B7FDF4ABA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCustomConfig", "..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\ApplicationCustomConfig.csproj", "{AF11C59D-9354-41AE-8DE2-0EA90F633791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationCustomLogger", "..\craftersmine-lib\ApplicationCustomLogger\ApplicationCustomLogger\ApplicationCustomLogger.csproj", "{6F9E1D56-9398-48F8-ACB4-677231858DBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lang_builder", "lang_builder\lang_builder.csproj", "{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "litescript_locale_loader", "litescript_locale_loader\litescript_locale_loader.csproj", "{5AE9D651-E123-4048-8560-4FA1B80A8EFB}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "litescript_settings_prov", "litescript_settings_prov\litescript_settings_prov.csproj", "{AB571B79-ACC1-400B-A583-283DF9CD9D0E}"
 EndProject
 Global
@@ -23,6 +31,22 @@ Global
 		{40380CD4-711A-45F0-8661-47B7FDF4ABA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40380CD4-711A-45F0-8661-47B7FDF4ABA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40380CD4-711A-45F0-8661-47B7FDF4ABA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF11C59D-9354-41AE-8DE2-0EA90F633791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF11C59D-9354-41AE-8DE2-0EA90F633791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF11C59D-9354-41AE-8DE2-0EA90F633791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF11C59D-9354-41AE-8DE2-0EA90F633791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9E1D56-9398-48F8-ACB4-677231858DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9E1D56-9398-48F8-ACB4-677231858DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9E1D56-9398-48F8-ACB4-677231858DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9E1D56-9398-48F8-ACB4-677231858DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AE9D651-E123-4048-8560-4FA1B80A8EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE9D651-E123-4048-8560-4FA1B80A8EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE9D651-E123-4048-8560-4FA1B80A8EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE9D651-E123-4048-8560-4FA1B80A8EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AB571B79-ACC1-400B-A583-283DF9CD9D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AB571B79-ACC1-400B-A583-283DF9CD9D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB571B79-ACC1-400B-A583-283DF9CD9D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5DE9180-F0D7-466C-9D54-5F6AB4C55812}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{09FCF41A-93AF-4564-8038-B3BD38FFF1BC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>craftersmine.LiteScript</RootNamespace>
-    <AssemblyName>ltsmain</AssemblyName>
+    <RootNamespace>lang_builder</RootNamespace>
+    <AssemblyName>lang_builder</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,9 +21,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\documentation.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,36 +32,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ccclibrary">
+      <HintPath>..\..\..\VS\craftersmine\Lib\ApplicationCustomConfig\ApplicationCustomConfig\bin\Release\ccclibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\litescript_main\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parser\ParserCore.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Project.cs" />
-    <Compile Include="Script\ScriptFile.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\ApplicationCustomConfig.csproj">
-      <Project>{af11c59d-9354-41ae-8de2-0ea90f633791}</Project>
-      <Name>ApplicationCustomConfig</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\litescript_locale_loader\litescript_locale_loader.csproj">
-      <Project>{5ae9d651-e123-4048-8560-4fa1b80a8efb}</Project>
-      <Name>litescript_locale_loader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\litescript_settings_prov\litescript_settings_prov.csproj">
-      <Project>{ab571b79-acc1-400b-a583-283df9cd9d0e}</Project>
-      <Name>litescript_settings_prov</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

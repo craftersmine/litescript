@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using craftersmine.LiteScript.Cfg.Console;
+using craftersmine.LiteScript.Locale.Console;
+using craftersmine.Config;
 
 namespace craftersmine.LiteScript.Parser
 {
@@ -19,8 +21,12 @@ namespace craftersmine.LiteScript.Parser
 
         private string[] _scriptContents;
 
+        public static Commons Settings = SettingsInitializer.Load();
+        public static Localization Locale = LocaleLoader.Load();
+
         public ParserCore(string file)
         {
+            
             Filename = file;
             _scriptContents = new Script.Project(file).GetScriptFile().FileContents; // Получаем построчное содержание файла
             Run();
@@ -31,7 +37,8 @@ namespace craftersmine.LiteScript.Parser
             if (ParsingRunningEvent != null)
             {
                 #region ParsingEventRunning Init
-                ConsoleWindow.WriteLine(new Configuration.Configuration(Application.StartupPath + @"\localizedRes\" + new Configuration.Configuration(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\craftersmine\LiteScript\Commons\Settings.conf")).GetString("common.lang") + @"\console\console.lang", false).GetString("state.running")); 
+                
+                ConsoleWindow.WriteLine(Locale.StateRunning); 
                 ParsingRunningEventArgs _prea = new ParsingRunningEventArgs();
                 _prea.CurrentCommand = _scriptContents[0];
                 ParsingRunningEvent(null, _prea);

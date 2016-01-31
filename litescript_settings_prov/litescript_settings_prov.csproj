@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>craftersmine.LiteScript.Cfg</RootNamespace>
-    <AssemblyName>lssprov</AssemblyName>
+    <AssemblyName>ltssprov</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApplicationCustomConfig">
-      <HintPath>..\..\Lib\ApplicationCustomConfig\ApplicationCustomConfig\bin\Release\ApplicationCustomConfig.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\litescript_main\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +47,20 @@
     <Compile Include="Common\CommonRes.cs" />
     <Compile Include="Console\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\ApplicationCustomConfig.csproj">
+      <Project>{af11c59d-9354-41ae-8de2-0ea90f633791}</Project>
+      <Name>ApplicationCustomConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomLogger\ApplicationCustomLogger\ApplicationCustomLogger.csproj">
+      <Project>{6f9e1d56-9398-48f8-acb4-677231858dbf}</Project>
+      <Name>ApplicationCustomLogger</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

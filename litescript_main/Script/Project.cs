@@ -1,12 +1,12 @@
 ﻿using System.IO;
 
-using craftersmine.Configuration;
+using craftersmine.Config;
 
 namespace craftersmine.LiteScript.Script
 {
     public class Project
     {
-        private Configuration.Configuration _project;
+        private Configuration _project;
 
         public string ProjectFilename { get; }
         public string ScriptFilename { get; set; }
@@ -19,7 +19,7 @@ namespace craftersmine.LiteScript.Script
             string _ext = Path.GetExtension(ProjectFilename);
             if (_ext == ".lsproj")
             {
-                _project = new Configuration.Configuration(file, false);  // Подгружаем конфигурацию проекта
+                _project = new Configuration(file, false);  // Подгружаем конфигурацию проекта
                 ScriptName = _project.GetString("project.scriptname");
                 ScriptFilename = _project.GetString("project.scriptfilename");
                 ProjectRootFolder = _project.GetString("project.root");
