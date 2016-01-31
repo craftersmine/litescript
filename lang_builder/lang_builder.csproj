@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ccclibrary">
-      <HintPath>..\..\..\VS\craftersmine\Lib\ApplicationCustomConfig\ApplicationCustomConfig\bin\Release\ccclibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\litescript_main\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>

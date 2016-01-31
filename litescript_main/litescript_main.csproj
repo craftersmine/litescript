@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ccclibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\bin\Debug\ccclibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -45,10 +49,6 @@
     <Compile Include="Script\ScriptFile.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\ApplicationCustomConfig.csproj">
-      <Project>{af11c59d-9354-41ae-8de2-0ea90f633791}</Project>
-      <Name>ApplicationCustomConfig</Name>
-    </ProjectReference>
     <ProjectReference Include="..\litescript_locale_loader\litescript_locale_loader.csproj">
       <Project>{5ae9d651-e123-4048-8560-4fa1b80a8efb}</Project>
       <Name>litescript_locale_loader</Name>
