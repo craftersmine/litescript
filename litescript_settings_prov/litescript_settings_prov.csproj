@@ -49,16 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomConfig\ApplicationCustomConfig\ApplicationCustomConfig.csproj">
-      <Project>{af11c59d-9354-41ae-8de2-0ea90f633791}</Project>
-      <Name>ApplicationCustomConfig</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\craftersmine-lib\ApplicationCustomLogger\ApplicationCustomLogger\ApplicationCustomLogger.csproj">
-      <Project>{6f9e1d56-9398-48f8-acb4-677231858dbf}</Project>
-      <Name>ApplicationCustomLogger</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
