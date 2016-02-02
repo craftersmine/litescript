@@ -1,3 +1,5 @@
+![Logo](http://s24.postimg.org/6lodkwt6t/logo_litescript.png)
+
 # litescript
 
 lightweight scripts!
