@@ -14,7 +14,17 @@ namespace craftersmine.LiteScript.Locale.Console
 {
     public class Localization
     {
-            public string StateRunning;
+        #region States
+        public string StateRunning;
+        public string StateStopped;
+        public string StateStoppedWithErr;
+        #endregion
+
+        #region Errors
+        public string IncorrectFileError;
+        public string VariableNameCannotBeNull;
+        public string VariableNotInitialized;
+        #endregion
     }
 
     public class LocaleLoader

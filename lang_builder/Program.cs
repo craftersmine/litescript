@@ -16,9 +16,16 @@ namespace lang_builder
             try
             {
                 string path = Application.StartupPath + @"\console.lang";
-                Locale _locale = new Locale();
+                Localization _locale = new Localization();
+
+                //Build
                 _locale.StateRunning = "Выполняется...";
                 _locale.StateStopped = "Остановленно!";
+                _locale.IncorrectFileError = "Файл не является скриптом! Возможно файл поврежден!";
+                _locale.VariableNameCannotBeNull = "Ошибка на строке $linenum! Имя переменной не может быть пустым значением!";
+                _locale.StateStoppedWithErr = "Остановлено из-за ошибки в скрипте";
+                _locale.VariableNotInitialized = "Ошибка на строке $linenum! Невозможно получить значение переменной $name так как она не инициализирована!";
+
                 System.IO.File.WriteAllText(path, JsonConvert.SerializeObject(_locale));
                 Console.WriteLine("Success!");
                 Console.ReadKey();
@@ -31,9 +38,18 @@ namespace lang_builder
         }
     }
 
-    public class Locale
+    public class Localization
     {
+        #region States
         public string StateRunning;
         public string StateStopped;
+        public string StateStoppedWithErr;
+        #endregion
+
+        #region Errors
+        public string IncorrectFileError;
+        public string VariableNameCannotBeNull;
+        public string VariableNotInitialized;
+        #endregion
     }
 }
