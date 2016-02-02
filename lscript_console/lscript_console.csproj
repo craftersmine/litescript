@@ -46,6 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\litescript_locale_loader\litescript_locale_loader.csproj">
+      <Project>{5AE9D651-E123-4048-8560-4FA1B80A8EFB}</Project>
+      <Name>litescript_locale_loader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\litescript_main\litescript_main.csproj">
       <Project>{c5de9180-f0d7-466c-9d54-5f6ab4c55812}</Project>
       <Name>litescript_main</Name>

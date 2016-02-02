@@ -9,6 +9,7 @@ namespace craftersmine.LiteScript.Script
     {
         public string[] FileContents { get; set; }
         public string Filename { get; }
+        public int CommentLinesCount { get; set; }
 
         public ScriptFile(string file)
         {
@@ -23,6 +24,7 @@ namespace craftersmine.LiteScript.Script
                 {
                     if (!line.StartsWith("#"))
                         _fcontents.Add(line);
+                    else CommentLinesCount++;
                 }
                 FileContents = _fcontents.ToArray();
             }
@@ -31,6 +33,7 @@ namespace craftersmine.LiteScript.Script
                 {
                     if (!line.StartsWith("#"))
                         _fcontents.Add(line);
+                    else CommentLinesCount++;
                 }
             FileContents = _fcontents.ToArray();  // Иначе читаем в FileContents
         }
