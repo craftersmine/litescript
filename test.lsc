@@ -1,0 +1,21 @@
+~lscript
+#testing title settling
+system:setTitle["Test Script"]
+#testing console write @Ln extention
+system:out:write@Ln["test system:out:write@Ln"]
+#testing console write
+system:out:write["test system:out:write"]
+system:out:write[":write"]
+#testing variables
+system:out:write@Ln[""]
+string$testvar<=setValue["testValue"]
+system:out:write@Ln[$testvar=>getValue]
+system:out:write@Ln["new value"]
+string$testvar<=setValue["testValueYAY"]
+system:out:write@Ln[$testvar=>getValue]
+#testing console reading in variables
+system:in:read[$testvar<=setValue]
+system:out:write@Ln[$testvar=>getValue]
+#testing string variables join
+
+~end
