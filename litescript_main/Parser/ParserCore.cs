@@ -6,6 +6,8 @@ using System.ComponentModel;
 using craftersmine.LiteScript.Cfg.Console;
 using craftersmine.LiteScript.Locale.Console;
 
+using craftersmine.LiteScript.Parser.Patterns;
+
 namespace craftersmine.LiteScript.Parser
 {
     public class ParserCore
@@ -30,6 +32,14 @@ namespace craftersmine.LiteScript.Parser
 
         public static Commons Settings = SettingsInitializer.Load();       // Settings
         public static Localization Locale = LocaleLoader.Load();           // Localizaton
+
+        public static bool StopReasonIsEnd = true;
+        public static int LineCounter;
+
+        #region Variable DB
+        public static Dictionary<string, string> StringVars = new Dictionary<string, string>();
+        public static Dictionary<string, int> IntVars = new Dictionary<string, int>();
+        #endregion
         #endregion
 
         public ParserCore(string file)
@@ -58,113 +68,102 @@ namespace craftersmine.LiteScript.Parser
 
         public void Parse()
         {
-            bool stopReasonIsEnd = true;
-
-            #region Variable DB
-            Dictionary<string, string> _stringVars = new Dictionary<string, string>();
-            Dictionary<string, int>    _intVars    = new Dictionary<string, int>();
-            #endregion
-
             #region Regex Patterns
             //system
-            string pattern_system_out_write = @"system:out:write\[""(.*)""\]";
-            string pattern_system_out_writeLn = @"system:out:write@Ln\[""(.*)""\]";
-            string pattern_system_setTitle = @"system:setTitle\[""(.*)""\]";
-
-            string pattern_system_out_write_var = @"system:out:write\[\$([\w\s].*)=>getValue\]";
+            
             string pattern_system_out_writeLn_var = @"system:out:write@Ln\[\$([\w\s].*)=>getValue\]";
-
-            string pattern_system_in_read = @"system:in:read\[\$(.*)<=setValue\]";
-            //variables
-            string pattern_string_var = @"string\$(.*)<=setValue\[""(.*)""\]";
             #endregion
 
-            int _lineCounter = 1 + CommentLinesCounter;
+            LineCounter = 1 + CommentLinesCounter;
 
             foreach (var line in _scriptContents)
             {
+
                 #region system:
-                //system:out:write
-                //normaltext
-                if (Regex.IsMatch(line, pattern_system_out_write))
-                    Console.Write(Regex.Match(line, pattern_system_out_write).Groups[1].Value);
-
-
-                //variable val
-                if (Regex.IsMatch(line, pattern_system_out_write_var))
+                #region system:out:write
+                #region normaltext
+                if (Regex.IsMatch(line, SystemPatterns.SystemOutWrite))
+                    Console.Write(Regex.Match(line, SystemPatterns.SystemOutWrite).Groups[1].Value);
+                #endregion
+                #region variable val
+                if (Regex.IsMatch(line, SystemPatterns.SystemOutWriteVar))
                 {
-                    if (_stringVars.ContainsKey(Regex.Match(line, pattern_system_out_write_var).Groups[1].Value))
+                    if (StringVars.ContainsKey(Regex.Match(line, SystemPatterns.SystemOutWriteVar).Groups[1].Value))
                     {
                         string val;
-                        _stringVars.TryGetValue(Regex.Match(line, pattern_system_out_write_var).Groups[1].Value, out val);
+                        StringVars.TryGetValue(Regex.Match(line, SystemPatterns.SystemOutWriteVar).Groups[1].Value, out val);
                         Console.Write(val);
                     }
-                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, pattern_system_out_write_var).Groups[1].Value).Replace("$linenum", _lineCounter.ToString())); stopReasonIsEnd = false; break; }
+                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, SystemPatterns.SystemOutWriteVar).Groups[1].Value).Replace("$linenum", ParserCore.LineCounter.ToString())); StopReasonIsEnd = false; break; }
                 }
+                #endregion
+                #endregion
 
-
-                //system:out:write@Ln
-                //normaltext
-                if (Regex.IsMatch(line, pattern_system_out_writeLn))
+                #region system:out:write@Ln
+                #region normaltext
+                if (Regex.IsMatch(line, SystemPatterns.SystemOutWriteLn))
                 {
-                    string capture = Regex.Match(line, pattern_system_out_writeLn).Groups[1].Value;
+                    string capture = Regex.Match(line, SystemPatterns.SystemOutWriteLn).Groups[1].Value;
                     if (capture == string.Empty)
                         Console.WriteLine();
                     else
                         Console.WriteLine(capture);
                 }
+                #endregion
 
-
-                //variable val
-                if (Regex.IsMatch(line, pattern_system_out_writeLn_var))
+                #region variable val
+                if (Regex.IsMatch(line, SystemPatterns.SystemOutWriteLnVar))
                 {
-                    if (_stringVars.ContainsKey(Regex.Match(line, pattern_system_out_writeLn_var).Groups[1].Value))
+                    if (StringVars.ContainsKey(Regex.Match(line, SystemPatterns.SystemOutWriteLnVar).Groups[1].Value))
                     {
                         string val;
-                        _stringVars.TryGetValue(Regex.Match(line, pattern_system_out_writeLn_var).Groups[1].Value, out val);
+                        StringVars.TryGetValue(Regex.Match(line, SystemPatterns.SystemOutWriteLnVar).Groups[1].Value, out val);
                         if (val == "null")
                             Console.WriteLine("\r\n");
                         else
                             Console.WriteLine(val);
                     }
-                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, pattern_system_out_writeLn_var).Groups[1].Value).Replace("$linenum", _lineCounter.ToString())); stopReasonIsEnd = false; break; }
+                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, SystemPatterns.SystemOutWriteLnVar).Groups[1].Value).Replace("$linenum", LineCounter.ToString())); StopReasonIsEnd = false; break; }
 
 
-                }
-
-
-                //system:setTitle
-                if (Regex.IsMatch(line, pattern_system_setTitle))
-                    Console.Title = Regex.Match(line, pattern_system_setTitle).Groups[1].Value;
-
-
-                //system:in:read
-                if (Regex.IsMatch(line, pattern_system_in_read))
-                {
-                    string varNameCapture = Regex.Match(line, pattern_system_in_read).Groups[1].Value;
-                    Console.WriteLine();
-                    Console.Write("Input > ");
-                    string readed = Console.ReadLine().Replace("Input > ", "");
-                    if (_stringVars.ContainsKey(varNameCapture))
-                    {
-                        _stringVars.Remove(varNameCapture);
-                        _stringVars.Add(varNameCapture, readed);
-                    }
-                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, pattern_system_out_writeLn_var).Groups[1].Value).Replace("$linenum", _lineCounter.ToString())); stopReasonIsEnd = false; break; }
                 }
                 #endregion
+                #endregion
 
+                #region system:setTitle
+                if (Regex.IsMatch(line, SystemPatterns.SystemSetTitle))
+                    Console.Title = Regex.Match(line, SystemPatterns.SystemSetTitle).Groups[1].Value;
+                #endregion
 
-                #region Variables Parser
-                //string
-                if (Regex.IsMatch(line, pattern_string_var))
+                #region system:in:read
+                if (Regex.IsMatch(line, SystemPatterns.SystemInRead))
                 {
-                    string capture_name = Regex.Match(line, pattern_string_var).Groups[1].Value;
-                    string capture_value = Regex.Match(line, pattern_string_var).Groups[2].Value;
+                    string varNameCapture = Regex.Match(line, SystemPatterns.SystemInRead).Groups[1].Value;
+                    Console.WriteLine();
+                    Console.Write("> ");
+                    string readed = Console.ReadLine().Replace("> ", "");
+                    if (StringVars.ContainsKey(varNameCapture))
+                    {
+                        StringVars.Remove(varNameCapture);
+                        if (readed == string.Empty)
+                            StringVars.Add(varNameCapture, "null");
+                        else StringVars.Add(varNameCapture, readed);
+                    }
+                    else { SendError(Locale.VariableNotInitialized.Replace("$name", Regex.Match(line, SystemPatterns.SystemInRead).Groups[1].Value).Replace("$linenum", LineCounter.ToString())); StopReasonIsEnd = false; break; }
+                }
+                #endregion
+                #endregion
+                
+                #region Variables Parser
+                #region string
+                if (Regex.IsMatch(line, SystemPatterns.StringVar))
+                {
+                    string capture_name = Regex.Match(line, SystemPatterns.StringVar).Groups[1].Value;
+                    string capture_value = Regex.Match(line, SystemPatterns.StringVar).Groups[2].Value;
                     if (capture_name == string.Empty)
                     {
-                        SendError("\r\n" + Locale.VariableNameCannotBeNull.Replace("$linenum", _lineCounter.ToString()));
-                        stopReasonIsEnd = false;
+                        SendError("\r\n" + Locale.VariableNameCannotBeNull.Replace("$linenum", LineCounter.ToString()));
+                        StopReasonIsEnd = false;
                         break;
                     }
                     else
@@ -172,32 +171,32 @@ namespace craftersmine.LiteScript.Parser
                         switch (capture_value)
                         {
                             case "":
-                                if (!_stringVars.ContainsKey(capture_name))
-                                    _stringVars.Add(capture_name, "null");
+                                if (!StringVars.ContainsKey(capture_name))
+                                    StringVars.Add(capture_name, "null");
                                 else
                                 {
-                                    _stringVars.Remove(capture_name);
-                                    _stringVars.Add(capture_name, "null");
+                                    StringVars.Remove(capture_name);
+                                    StringVars.Add(capture_name, "null");
                                 }
                                 break;
                             default:
-                                if (!_stringVars.ContainsKey(capture_name))
-                                    _stringVars.Add(capture_name, capture_value);
+                                if (!StringVars.ContainsKey(capture_name))
+                                    StringVars.Add(capture_name, capture_value);
                                 else
                                 {
-                                    _stringVars.Remove(capture_name);
-                                    _stringVars.Add(capture_name, capture_value);
+                                    StringVars.Remove(capture_name);
+                                    StringVars.Add(capture_name, capture_value);
                                 }
                                 break;
                         }
                     }
                 }
                 #endregion
-
-
-                _lineCounter++;
+                #endregion
+                
+                LineCounter++;
             }
-            Stop(stopReasonIsEnd);
+            Stop(StopReasonIsEnd);
             
         }
 
