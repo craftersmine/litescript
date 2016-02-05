@@ -1,4 +1,4 @@
-![Logo](http://s24.postimg.org/6lodkwt6t/logo_litescript.png)
+![Logo](http://s2.postimg.org/5f8ggdacp/logo_litescript.png)
 
 # litescript
 
