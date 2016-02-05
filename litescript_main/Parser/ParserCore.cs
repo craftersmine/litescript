@@ -10,15 +10,34 @@ using craftersmine.LiteScript.Parser.Patterns;
 
 namespace craftersmine.LiteScript.Parser
 {
-    public class ParserCore
+    /// <summary>
+    /// Main parser core. This class can not be inherited
+    /// </summary>
+    public sealed class ParserCore
     {
         #region Delegates
+        /// <summary>
+        /// Parse Running State Event Delegate
+        /// </summary>
+        /// <param name="sender">Event caller</param>
+        /// <param name="e">Event arguments</param>
         public delegate void ParsingRunningEventDelegate(object sender, ParsingRunningEventArgs e);
+        /// <summary>
+        /// Parse Stopped State Event Delegate
+        /// </summary>
+        /// <param name="sender">Event caller</param>
+        /// <param name="e">Event arguments</param>
         public delegate void ParsingStoppedEventDelegate(object sender, ParsingStoppedEventArgs e);
         #endregion
 
         #region Events
+        /// <summary>
+        /// Parse Running State Event
+        /// </summary>
         public event ParsingRunningEventDelegate ParsingRunningEvent;
+        /// <summary>
+        /// Parse Running State Event
+        /// </summary>
         public event ParsingStoppedEventDelegate ParsingStoppedEvent;
         #endregion
 
@@ -68,12 +87,6 @@ namespace craftersmine.LiteScript.Parser
 
         public void Parse()
         {
-            #region Regex Patterns
-            //system
-            
-            string pattern_system_out_writeLn_var = @"system:out:write@Ln\[\$([\w\s].*)=>getValue\]";
-            #endregion
-
             LineCounter = 1 + CommentLinesCounter;
 
             foreach (var line in _scriptContents)
@@ -193,7 +206,13 @@ namespace craftersmine.LiteScript.Parser
                 }
                 #endregion
                 #endregion
+
+                #region fs:
+
                 
+
+                #endregion
+
                 LineCounter++;
             }
             Stop(StopReasonIsEnd);

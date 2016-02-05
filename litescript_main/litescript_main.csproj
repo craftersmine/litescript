@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parser\ParserCore.cs" />
-    <Compile Include="Parser\Patterns\System.cs" />
+    <Compile Include="Parser\Patterns\Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Project.cs" />
     <Compile Include="Script\ScriptFile.cs" />
